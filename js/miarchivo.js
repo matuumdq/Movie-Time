@@ -18,7 +18,7 @@ if(seleccion==1) {
         precio = 800
         totIva(precio)
         console.log ("Solicitara el Plan Familiar por: $", total, "con iva e impuestos incluidos")
-        cantidad = parseInt(prompt("Cuantas personas lo usaran?(maximo 4"))
+        cantidad = parseInt(prompt("Cuantas personas lo usaran?(maximo 4)"))
         if (cantidad<=4){
             personas(cantidad)
         } else {
@@ -28,7 +28,7 @@ if(seleccion==1) {
         precio = 1200
         totIva(precio)
         console.log ("Solicitara el Plan Premium por: $", total, "con iva e impuestos incluidos")
-        cantidad = parseInt(prompt("Cuantas personas lo usaran?(maximo 4"))
+        cantidad = parseInt(prompt("Cuantas personas lo usaran?(maximo 4)"))
         if (cantidad<=4){
             personas(cantidad)
         } else {
