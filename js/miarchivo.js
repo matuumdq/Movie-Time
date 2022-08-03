@@ -1,5 +1,5 @@
 const peliculas = []
-const series = ['Breaking Bad', 'The Boys', 'Mr. Robot', 'Peaky Blinders', 'The Sinner']
+const series = ['BREAKING BAD', 'THE BOYS', 'MR. ROBOT', 'PEAKY BLINDERS', 'THE SINNER']
 
 function seleccionPlan(){
     seleccion=prompt('Selecciona un numero para el Plan deseado: 1- Simple, 2- Famliar, 3- Premium')
@@ -79,7 +79,7 @@ function seleccionPlan(){
         }
 
     function buscarSerie() {
-        let buscar = prompt('Ingrese el nombre de la serie que quiere ver: ')
+        let buscar = prompt('Ingrese el nombre de la serie que quiere ver: ').toUpperCase()
         let resultSerie = series.includes(buscar)
         if (resultSerie === false){
             console.log ('Nuestro catalogo no cuenta con la series: ', buscar)
@@ -89,7 +89,7 @@ function seleccionPlan(){
     }
 
     function eliminarSerie (){
-        let sacarSerie = prompt('Ingrese el titulo de la serie a agregar: ')
+        let sacarSerie = prompt('Ingrese el titulo de la serie a agregar: ').toUpperCase()
         let lugarSerie = series.indexOf(sacarSerie)
         if (lugarSerie === -1){
             console.warn('Serie no eliminada, no esta en nuestro listado')
