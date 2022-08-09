@@ -52,6 +52,8 @@ function seleccionPlan(){
         console.log("Hola Persona: ", i)
     }
 
+
+    // Peliculas
     class Pelicula {
         constructor(nombre, genero, year, calificacion) {
             this.nombre = nombre
@@ -62,12 +64,12 @@ function seleccionPlan(){
     }
 
     function generadorPelis() {
-        peliculas.push(new Pelicula('Inception', 'Accion', 2010, 8.8))
-        peliculas.push(new Pelicula('Fracture', 'Crimen', 2007, 7.2 ))
-        peliculas.push(new Pelicula('Perdida', 'Suspenso', 2014, 7.3))
-        peliculas.push(new Pelicula('El club de la pelea', 'Suspenso', 1999, 8.8))
-        peliculas.push(new Pelicula('Hogar', 'Drama', 2020, 6.4))
-        peliculas.push(new Pelicula('El Bar', 'Aventura', 2017, 6.3))
+        peliculas.push(new Pelicula('inception', 'accion', 2010, 8.8))
+        peliculas.push(new Pelicula('fracture', 'crimen', 2007, 7.2))
+        peliculas.push(new Pelicula('perdida', 'suspenso', 2014, 7.3))
+        peliculas.push(new Pelicula('el club de la pelea', 'suspenso', 1999, 8.8))
+        peliculas.push(new Pelicula('hogar', 'drama', 2020, 6.4))
+        peliculas.push(new Pelicula('el bar', 'aventura', 2017, 6.3))
     }
 
     function agregarPeli(){
@@ -76,16 +78,44 @@ function seleccionPlan(){
             let year = parseInt(prompt("Ano de la pelicula"))
             let calificacion = parseFloat(prompt('Calificacion IMDB de su pelicula: ')).toFixed(1)
             peliculas.push(new Pelicula(nombre, genero, year, calificacion))
-        }
+    }
+
+    function peliDisponible(){
+        let nombrePeli = prompt('Ingresa el nombre de la peli').toLowerCase()
+        const existe = peliculas.some(peli=> peli.nombre === (nombrePeli))
+        console.log("Esta disponible: ",existe)
+    }
+    
+    function busquePeliGenero(){
+      let generoABuscar = prompt('Ingrese genero de la peli que quiera ver: ').toLowerCase()
+      const peliPorGener = peliculas.filter(pelis => pelis.genero.includes(generoABuscar))
+      console.log('Puede ver la peli: ', peliPorGener)
+    }
+
+    function ordenarPelis(){
+        peliculas.sort((a,b) => {
+            if (a.calificacion < b.calificacion){
+              return 1
+            }
+            if (a.calificacion > b.calificacion){
+              return -1
+            }
+            return 0
+        })
+        console.table(peliculas)
+    }
+
+    
+        // Series
 
     function buscarSerie() {
         let buscar = prompt('Ingrese el nombre de la serie que quiere ver: ').toUpperCase()
         let resultSerie = series.includes(buscar)
-        if (resultSerie === false){
+            if (resultSerie === false){
             console.log ('Nuestro catalogo no cuenta con la series: ', buscar)
-        } else {
+            } else {
             console.log('En breve se reproducira la serie: ', buscar)
-        }
+            }
     }
 
     function eliminarSerie (){
