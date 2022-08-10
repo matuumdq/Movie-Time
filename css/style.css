@@ -1,6 +1,20 @@
+body{
+    background-color: black;
+}
+
+h3,
+h4 {
+    text-align: center;
+    margin: 40px;
+    color: white;
+}
+
 .flexeando {
     display: flex;
     justify-content: center;
+}
+#cardPeli{
+    background-color: grey;
 }
 
 .card {
@@ -8,8 +22,17 @@
     margin: 40px;
 }
 
-h3,
-h4 {
-    text-align: center;
-    margin: 40px;
+.pelis {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pelicula{
+    width: 20vw;
+}
+
+.funciones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
 }

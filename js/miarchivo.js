@@ -1,5 +1,6 @@
 const peliculas = []
 const series = ['BREAKING BAD', 'THE BOYS', 'MR. ROBOT', 'PEAKY BLINDERS', 'THE SINNER']
+const seccionPeli = document.getElementById('card-pelis');
 
 function seleccionPlan(){
     seleccion=prompt('Selecciona un numero para el Plan deseado: 1- Simple, 2- Famliar, 3- Premium')
@@ -78,6 +79,21 @@ function seleccionPlan(){
             let year = parseInt(prompt("Ano de la pelicula"))
             let calificacion = parseFloat(prompt('Calificacion IMDB de su pelicula: ')).toFixed(1)
             peliculas.push(new Pelicula(nombre, genero, year, calificacion))
+            limpiarHTML()
+            const cardPelicula = document.createElement('div')
+            cardPelicula.className="pelis"
+            peliculas.forEach(peli => {
+                cardPelicula.innerHTML += `<div class="card pelicula">
+                <div class="card-body">
+                  <h5 class="card-title">${peli.nombre}</h5>
+                  <p class="card-text">${peli.genero}</p>
+                  <p class="card-text">Calificacion: ${peli.calificacion}</p>
+                  <a href="#" class="btn btn-primary">Ver</a>
+                  <a href="#" class="btn btn-primary">Descargar</a>
+                </div>
+              </div>`
+              seccionPeli.appendChild(cardPelicula)
+            })
     }
 
     function peliDisponible(){
@@ -127,4 +143,8 @@ function seleccionPlan(){
             series.splice(lugarSerie, 1)
             console.log('Se elimino la serie: ', sacarSerie)
         }
+    }
+
+    function limpiarHTML(){
+        seccionPeli.innerHTML = ' asd';
     }
