@@ -172,7 +172,7 @@ function seleccionPlan(){
         peliDisponible(textPeli)})
 
     btnAgregarPeli.addEventListener('click', ()=>{
-        const nombreAgregado = inpNombre.value
+        const nombreAgregado = inpNombre.value.toLowerCase()
         const generoAgregado = inpGenero.value
         const califAgregado = inpCalif.value
         agregarPeli(nombreAgregado, generoAgregado, califAgregado)
