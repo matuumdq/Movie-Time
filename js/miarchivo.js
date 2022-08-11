@@ -1,6 +1,14 @@
 const peliculas = []
 const series = ['BREAKING BAD', 'THE BOYS', 'MR. ROBOT', 'PEAKY BLINDERS', 'THE SINNER']
-const seccionPeli = document.getElementById('card-pelis');
+const seccionPeli = document.getElementById('card-pelis')
+
+const nombreBuscarPeli = document.querySelector('#peli-buscada')
+const btnBuscarPeli = document.querySelector('#buscar')
+
+const inpNombre = document.querySelector('#agregar-nombre')
+const inpGenero = document.querySelector('#agregar-genero')
+const inpCalif = document.querySelector('#agregar-calif')
+const btnAgregarPeli = document.querySelector('#agregar-peli')
 
 function seleccionPlan(){
     seleccion=prompt('Selecciona un numero para el Plan deseado: 1- Simple, 2- Famliar, 3- Premium')
@@ -56,29 +64,30 @@ function seleccionPlan(){
 
     // Peliculas
     class Pelicula {
-        constructor(nombre, genero, year, calificacion) {
+        constructor(nombre, genero, calificacion) {
             this.nombre = nombre
             this.genero = genero
-            this.year = year
             this.calificacion = calificacion
         }
     }
 
     function generadorPelis() {
-        peliculas.push(new Pelicula('inception', 'accion', 2010, 8.8))
-        peliculas.push(new Pelicula('fracture', 'crimen', 2007, 7.2))
-        peliculas.push(new Pelicula('perdida', 'suspenso', 2014, 7.3))
-        peliculas.push(new Pelicula('el club de la pelea', 'suspenso', 1999, 8.8))
-        peliculas.push(new Pelicula('hogar', 'drama', 2020, 6.4))
-        peliculas.push(new Pelicula('el bar', 'aventura', 2017, 6.3))
+        peliculas.push(new Pelicula('inception', 'accion', 8.8))
+        peliculas.push(new Pelicula('fracture', 'crimen', 7.2))
+        peliculas.push(new Pelicula('perdida', 'suspenso', 7.3))
+        peliculas.push(new Pelicula('el club de la pelea', 'suspenso', 8.8))
+        peliculas.push(new Pelicula('hogar', 'drama', 6.4))
+        peliculas.push(new Pelicula('el bar', 'aventura', 6.3))
     }
 
-    function agregarPeli(){
-            let nombre = prompt('Ingrese nombre de la peli: ')
-            let genero = prompt("Genero de la peli: ")
-            let year = parseInt(prompt("Ano de la pelicula"))
-            let calificacion = parseFloat(prompt('Calificacion IMDB de su pelicula: ')).toFixed(1)
-            peliculas.push(new Pelicula(nombre, genero, year, calificacion))
+    generadorPelis()
+
+    function agregarPeli(nombrePeli, generoPeli, calificacionPeli){
+      
+            let nombre = nombrePeli
+            let genero = generoPeli
+            let calificacion = parseFloat(calificacionPeli).toFixed(1)
+            peliculas.push(new Pelicula(nombre, genero, calificacion))
             limpiarHTML()
             const cardPelicula = document.createElement('div')
             cardPelicula.className="pelis"
@@ -96,8 +105,8 @@ function seleccionPlan(){
             })
     }
 
-    function peliDisponible(){
-        let nombrePeli = prompt('Ingresa el nombre de la peli').toLowerCase()
+    function peliDisponible(nombre){
+        let nombrePeli = nombre.toLowerCase()
         const existe = peliculas.some(peli=> peli.nombre === (nombrePeli))
         console.log("Esta disponible: ",existe)
     }
@@ -146,5 +155,18 @@ function seleccionPlan(){
     }
 
     function limpiarHTML(){
-        seccionPeli.innerHTML = ' asd';
+        seccionPeli.innerHTML = '';
     }
+
+    //Eventos
+
+    btnBuscarPeli.addEventListener('click', () => {
+        const textPeli = nombreBuscarPeli.value
+        peliDisponible(textPeli)})
+
+    btnAgregarPeli.addEventListener('click', ()=>{
+        const nombreAgregado = inpNombre.value
+        const generoAgregado = inpGenero.value
+        const califAgregado = inpCalif.value
+        agregarPeli(nombreAgregado, generoAgregado, califAgregado)
+    })
