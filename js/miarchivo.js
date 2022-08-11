@@ -10,6 +10,8 @@ const inpGenero = document.querySelector('#agregar-genero')
 const inpCalif = document.querySelector('#agregar-calif')
 const btnAgregarPeli = document.querySelector('#agregar-peli')
 
+const textoBusqueda = document.querySelector('.formBuscarPeli')
+
 function seleccionPlan(){
     seleccion=prompt('Selecciona un numero para el Plan deseado: 1- Simple, 2- Famliar, 3- Premium')
     switch(seleccion) {
@@ -88,7 +90,7 @@ function seleccionPlan(){
             let genero = generoPeli
             let calificacion = parseFloat(calificacionPeli).toFixed(1)
             peliculas.push(new Pelicula(nombre, genero, calificacion))
-            limpiarHTML()
+            limpiarHTMLPeli()
             const cardPelicula = document.createElement('div')
             cardPelicula.className="pelis"
             peliculas.forEach(peli => {
@@ -108,7 +110,10 @@ function seleccionPlan(){
     function peliDisponible(nombre){
         let nombrePeli = nombre.toLowerCase()
         const existe = peliculas.some(peli=> peli.nombre === (nombrePeli))
-        console.log("Esta disponible: ",existe)
+        const textBusqueda = document.querySelector('#textoDisponible')
+        textBusqueda.className="parrafoPeli"
+        textBusqueda.innerHTML = ('La pelicula esta disponible: ' + existe)
+        textoBusqueda.appendChild(textBusqueda)
     }
     
     function busquePeliGenero(){
@@ -137,7 +142,7 @@ function seleccionPlan(){
         let buscar = prompt('Ingrese el nombre de la serie que quiere ver: ').toUpperCase()
         let resultSerie = series.includes(buscar)
             if (resultSerie === false){
-            console.log ('Nuestro catalogo no cuenta con la series: ', buscar)
+             ('Nuestro catalogo no cuenta con la series: ', buscar)
             } else {
             console.log('En breve se reproducira la serie: ', buscar)
             }
@@ -154,9 +159,11 @@ function seleccionPlan(){
         }
     }
 
-    function limpiarHTML(){
+    function limpiarHTMLPeli(){
         seccionPeli.innerHTML = '';
     }
+
+    
 
     //Eventos
 
