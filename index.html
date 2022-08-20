@@ -9,133 +9,25 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/bdd.js"></script>
     <script defer src="js/miarchivo.js"></script>
-    <title>Desafio 1</title>
+    <title>Preentrega 2 Salinas</title>
   </head>
 
   <body id="body">
-    <div class="flexeando">
-      <div class="card w-50">
-        <div class="card-body">
-          <h5 class="card-title">Plan Simple</h5>
-          <p class="card-text">
-            Plan para una casa, hasta dos pantallas en calidad 720p
-          </p>
-          <p class="card-text">$400</p>
-          <a href="#" class="btn btn-primary">Solicitar</a>
-        </div>
+
+    <div class="sector" id="listaPeli">
+      <h3>Mi Lista</h3>
+      <div id="listado" class="pelis">
+        
+        <div id="mi-lista" class="lista" style="display: flex; flex-wrap: wrap; gap:10px;"></div>
       </div>
-      <div class="card w-50">
-        <div class="card-body">
-          <h5 class="card-title">Plan Familiar</h5>
-          <p class="card-text">
-            Plan de familia, hasta 4 pantallas en calidad FullHD (1080p)
-          </p>
-          <p class="card-text">$800</p>
-          <a href="#" class="btn btn-primary">Solicitar</a>
-        </div>
-      </div>
-      <div class="card w-50">
-        <div class="card-body">
-          <h5 class="card-title">Plan Premium</h5>
-          <p class="card-text">
-            Plan recomendado. Hasta 4 pantallas al mismo tiempo en calidad 4K
-          </p>
-          <p class="card-text">$1200</p>
-          <a href="#" class="btn btn-primary">Solicitar</a>
-        </div>
-      </div>
+
+      <h3>Todas las mejores Peliculas</h3>
+      <div class="container"></div>
+
+      
     </div>
 
-    <div id="card-pelis" class="pelis">
-
-      <div class="card pelicula">
-        <div class="card-body">
-          <h5 class="card-title">Inception</h5>
-          <p class="card-text">Accion</p>
-          <p class="card-text">Calificacion: 8.8</p>
-          <a href="#" class="btn btn-primary">Ver</a>
-          <a href="#" class="btn btn-primary">Descargar</a>
-        </div>
-      </div>
-      <div class="card pelicula">
-        <div class="card-body">
-          <h5 class="card-title">Fracture</h5>
-          <p class="card-text">Crimen</p>
-          <p class="card-text">Calificacion: 7.2</p>
-          <a href="#" class="btn btn-primary">Ver</a>
-          <a href="#" class="btn btn-primary">Descargar</a>
-        </div>
-      </div>
-      <div class="card pelicula">
-        <div class="card-body">
-          <h5 class="card-title">Perdida</h5>
-          <p class="card-text">Suspenso</p>
-          <p class="card-text">Calificacion: 7.3</p>
-          <a href="#" class="btn btn-primary">Ver</a>
-          <a href="#" class="btn btn-primary">Descargar</a>
-        </div>
-      </div>
-      <div class="card pelicula">
-        <div class="card-body">
-          <h5 class="card-title">El Club de la Pelea</h5>
-          <p class="card-text">Suspenso</p>
-          <p class="card-text">Calificacion: 8.8</p>
-          <a href="#" class="btn btn-primary">Ver</a>
-          <a href="#" class="btn btn-primary">Descargar</a>
-        </div>
-      </div>
-      <div class="card pelicula">
-        <div class="card-body">
-          <h5 class="card-title">Hogar</h5>
-          <p class="card-text">Drama</p>
-          <p class="card-text">Calificacion: 6.4</p>
-          <a href="#" class="btn btn-primary">Ver</a>
-          <a href="#" class="btn btn-primary">Descargar</a>
-        </div>
-      </div>
-      <div class="card pelicula">
-        <div class="card-body">
-          <h5 class="card-title">El Bar</h5>
-          <p class="card-text">Aventura</p>
-          <p class="card-text">Calificacion: 6.3</p>
-          <a href="#" class="btn btn-primary">Ver</a>
-          <a href="#" class="btn btn-primary">Descargar</a>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="formAgregarPeli">
-      <input type="text" id="agregar-nombre" class="form-control-lg" placeholder="Nombre Pelicula"><br>
-      <input type="text" id="agregar-genero" class="form-control-lg" placeholder="Genero"><br>
-      <input type="text" id="agregar-calif" class="form-control-lg" placeholder="Calificacion"><br>
-      <button type="submit" id="agregar-peli" class="btn btn-primary btn" >Agregar</button>
-    </div>
-
-
-    <div class="formBuscarPeli">
-      <input type="text" id="peli-buscada" class="form-control-lg" placeholder="Nombre Pelicula"><br>
-      <button type="submit" id="buscar" class="btn btn-primary btn" >Buscar</button>
-      <p id="textoDisponible"></p>
-    </div>
-
-
-    <h3>Ejecutar funcion <strong>seleccionarPlan()</strong> en consola</h3>
-    <div class="funciones"> 
-      <div class="arraySeries">
-        <h3>Nombre array de series: series</h3>
-        <h4>Buscar serie: buscarSerie()</h4>
-        <h4>Eliminar serie: eliminarSerie()</h4>
-      </div>
-      <div class="arrayPeli">
-        <h3>Nombre array de Pelis: peliculas</h3>
-        <h4>Generar Peliculas automatico: generadorPelis()</h4>
-        <h4>Agregar Pelicula (DOM): agregarPeli()</h4>
-        <h4>Buscar Peliucla por genero: busquePeliGenero()</h4>
-        <h4>Saber si esta una pelicula: peliDisponible()</h4>
-        <h4>Ordenar Peliculas por valoracion: ordenarPelis()</h4>
-      </div>
-    </div>
   </body>
 </html>

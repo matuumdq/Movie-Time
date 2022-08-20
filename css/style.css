@@ -1,11 +1,10 @@
 body{
-    background-color: black;
+    background-color: #002B5B;
 }
 
 h3,
 h4 {
-    text-align: center;
-    margin: 40px;
+    margin: 5px;
     color: white;
 }
 
@@ -13,29 +12,44 @@ p{
     text-align: center;
 }
 
-.parrafoPeli{
-    color: white;
-}
-
-.flexeando {
-    display: flex;
-    justify-content: center;
-}
-#cardPeli{
-    background-color: grey;
-}
-
-.card {
-    text-align: center;
-    margin: 40px;
-}
 
 .pelis {
     display: flex;
     flex-wrap: wrap;
+    width: 100%
+}
+.container {
+    display: flex; 
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
+    max-width: 100%;
 }
 
-.pelicula{
+.card {
+    margin: 20px;
+    padding: 0;
+    width: 18rem;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.card-body{
+    text-align: center;
+}
+
+.sector {
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+/* .pelicula{
     width: 20vw;
 }
 
@@ -55,4 +69,4 @@ p{
     text-align: center;
     margin: 0 50%;
 }
-
+ */
