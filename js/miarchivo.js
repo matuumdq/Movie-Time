@@ -26,7 +26,6 @@ buscador.addEventListener('change', e=> {
 
 
 function crearPelis(){
-    // limpiarHTML()
     peliculas.forEach((pelis) => {
         containerDiv.innerHTML += `<div class="card" style="width: 18rem">
         <img
@@ -43,8 +42,6 @@ function crearPelis(){
 }
 
 function miListaHTML(){
-
-    //limpiar el HTML
     limpiarHTML();
     //recorre pelis y genera HTML
     pelisLista.forEach( peli => {
@@ -102,8 +99,6 @@ function leerDatosPeli(peli){
 
 function borrarPeli(peli){
     const infoPeli = {
-        // imagen: peli.querySelector('img').src, 
-        // nombre: peli.querySelector('p').textContent,
         id: peli.querySelector('a').getAttribute('id'),
     }
 
@@ -140,7 +135,6 @@ function peliFiltrada(pelis){
         row.innerHTML = `Seleccione un Genero para filtrar`
         resultado.appendChild(row);
     } else {
-    //recorre pelis y genera HTML
     pelis.forEach( peli => {
         const { imagen, nombre, id} = peli;
         const row = document.createElement('div')
