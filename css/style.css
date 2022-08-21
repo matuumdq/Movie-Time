@@ -2,10 +2,16 @@ body{
     background-color: #002B5B;
 }
 
-h3,
-h4 {
+h3{
     margin: 5px;
     color: white;
+}
+
+h4 {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin: 50px;
 }
 
 p{
@@ -49,24 +55,10 @@ p{
     display: flex;
     flex-direction: row;
 }
-/* .pelicula{
-    width: 20vw;
-}
 
-.funciones {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
+label{
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 10px
 }
-
-.formBuscarPeli, .formAgregarPeli{
-    margin: 15px auto;
-    text-align: center;
-}
-
-
-.btn-lg {
-    text-align: center;
-    margin: 0 50%;
-}
- */

@@ -120,14 +120,14 @@ const peliculas = [
     }, 
     {
         nombre: 'Frankenweenie',
-        genero: 'comedia',
+        genero: 'infantiles',
         calificacion: 6.9,
         imagen: "https://i0.wp.com/elpoderdelasideas.com/wp-content/uploads/posters-cine-2012-10.jpg?resize=550%2C786",
         id: 18
     }, 
     {
         nombre: 'Hotel Transylvania',
-        genero: 'comedia',
+        genero: 'infantiles',
         calificacion: 7.0,
         imagen: "https://i0.wp.com/elpoderdelasideas.com/wp-content/uploads/posters-cine-2012-11.jpg",
         id: 19
