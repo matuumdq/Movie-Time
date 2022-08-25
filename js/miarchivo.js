@@ -37,6 +37,8 @@ function crearPelis(){
           <p class="card-title">${pelis.nombre}</p>
           <a type="button" class="btn btn-primary agregar-lista" id="${pelis.id}">Agregar a la Lista</a>
         </div>
+
+
       </div>`
     })
 }
@@ -70,6 +72,7 @@ function agregarPeli(e){
         
         e.target.classList.add('disabled')
         e.target.textContent = 'Ya esta en la lista'
+        aLista()
         const peliSeleccionada = e.target.parentElement.parentElement;
         leerDatosPeli(peliSeleccionada);
     }
@@ -107,6 +110,7 @@ function borrarPeli(peli){
         pelisLista = pelisLista.filter((pelisFilter) => pelisFilter.id !== infoPeli.id)
    miListaHTML()
    localStorage.setItem("PelisenLista", JSON.stringify(pelisLista))
+   quitarLista()
     }}
 
 
@@ -117,7 +121,7 @@ function filtrarPeli(){
         console.log(resultado)
         peliFiltrada(resultado)
     } else {
-        console.log('asd')
+        return
     }
 }
 
@@ -127,6 +131,7 @@ function filtrarGenero(peli){
     } 
     return peli
 }
+
 
 function peliFiltrada(pelis){
     limpiandoGenero()
@@ -145,6 +150,10 @@ function peliFiltrada(pelis){
             <div class="card-body">
             <p class="card-title">${nombre}</p>
             <a type="button" class="btn btn-primary agregar-lista" id="${id}">Agregar a la Lista</a>
+            
+            
+
+
             </div>
             `;
             //Agregar Pelicula filtrada
@@ -167,5 +176,49 @@ function limpiandoGenero() {
     }
     
 }
+
+function aLista() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            background: 'green',
+            color: 'white',
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Pelicula agregada a la lista'
+          })
+}
+
+function quitarLista() {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        background: 'red',
+            color: 'white',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'Pelicula quitada de la lista'
+      })
+}
+
+
 miListaHTML()
 crearPelis()
