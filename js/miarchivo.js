@@ -5,15 +5,17 @@ const contenedorLista = document.querySelector('#listado')
 const contenedorListado = document.querySelector('#listado .pelis')
 const buscador = document.querySelector('#genero')
 const resultado = document.querySelector("#resultado")
+
 const datosBusqueda = {
     nombre:'',
     genero: '',
+    trailer: '',
+    reparto: '',
+    director: '',
     id: ''
-    
 }
 
 const containerDiv = document.querySelector(".container");
-
 
 
 btnAgregarLista.addEventListener('click', agregarPeli);
@@ -27,19 +29,21 @@ buscador.addEventListener('change', e=> {
 
 function crearPelis(){
     peliculas.forEach((pelis) => {
+        const {imagen, nombre, id, trailer, reparto, director} = pelis
         containerDiv.innerHTML += `<div class="card" style="width: 18rem">
         <img
           class="card-img-top"
-          src="${pelis.imagen}"
-          alt="${pelis.nombre}"
+          src="${imagen}"
+          alt="${nombre}"
         />
         <div class="card-body">
-          <p class="card-title">${pelis.nombre}</p>
-          <a type="button" class="btn btn-primary agregar-lista" id="${pelis.id}">Agregar a la Lista</a>
+          <p class="card-title">${nombre}</p>
+          <a type="button" class="btn btn-primary agregar-lista" id="${id}">Agregar a la Lista</a>
+        
         </div>
-
-
+        <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal">+Info</button>
       </div>`
+ 
     })
 }
 
@@ -47,7 +51,7 @@ function miListaHTML(){
     limpiarHTML();
     //recorre pelis y genera HTML
     pelisLista.forEach( peli => {
-        const { imagen, nombre, id} = peli;
+        const { imagen, nombre, id, } = peli;
         const row = document.createElement('div')
         row.classList.add('card')
         row.innerHTML += `
@@ -56,14 +60,15 @@ function miListaHTML(){
             <p class="card-title">${nombre}</p>
             <a type="button" class="btn btn-primary quitar-lista" id="${id}">Quitar de la Lista</a>
             </div>
+            <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal">+Info</button>
             `;
-
             //Agregar Pelicula a la lista
             contenedorLista.appendChild(row);
             localStorage.setItem("PelisenLista", JSON.stringify(pelisLista));
+            
     })
+    marcarBotones()
 }
-
 
 function agregarPeli(e){
     e.preventDefault();
@@ -80,7 +85,6 @@ function agregarPeli(e){
         const peliSeleccionada = e.target.parentElement.parentElement;
         borrarPeli(peliSeleccionada);
     }
-
 }
 
 
@@ -97,6 +101,7 @@ function leerDatosPeli(peli){
     } else {
         pelisLista = [...pelisLista, infoPeli]
         miListaHTML();
+        
 }
 }
 
@@ -111,6 +116,7 @@ function borrarPeli(peli){
    miListaHTML()
    localStorage.setItem("PelisenLista", JSON.stringify(pelisLista))
    quitarLista()
+   
     }}
 
 
@@ -150,15 +156,15 @@ function peliFiltrada(pelis){
             <div class="card-body">
             <p class="card-title">${nombre}</p>
             <a type="button" class="btn btn-primary agregar-lista" id="${id}">Agregar a la Lista</a>
-            
-            
-
-
             </div>
+            <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal">+info</button>
             `;
+            
             //Agregar Pelicula filtrada
             resultado.appendChild(row);
+            
     })
+    marcarBotones()
 }
 }
 
@@ -218,7 +224,59 @@ function quitarLista() {
         title: 'Pelicula quitada de la lista'
       })
 }
-
+function marcarBotones(){
+    const btnModal= document.querySelectorAll('.modals')
+        for (const button of btnModal) {
+            button.addEventListener('click', function(peli) {
+                const peliSeleccionada = peli.target.parentElement;
+                const asd = {id : peliSeleccionada.querySelector('a').getAttribute('id')}
+                const existe = peliculas.find(pelis => pelis.id === parseInt(asd.id));
+                crearModal(existe)
+            })
+          }
+    
+          function crearModal(datosPeli){
+            console.log(datosPeli)
+            const {nombre, genero, calificacion, trailer, reparto, director, id} = datosPeli
+            const row = document.querySelector('#exampleModal')
+            row.innerHTML = `
+            <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title texto-titulo" id="exampleModalLabel">${nombre}</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-6"><div class="embed-responsive">
+                <iframe
+                    id="iframeVideo" width="550" height="320"
+                    class="embed"
+                    src="${trailer}"                              
+                    allow="autoplay"
+                ></iframe>           
+                </div>
+                </div> 
+                <div class="col-lg-6 contenedor-texto">
+                <p class="texto-parrafo"><span class="texto-span">Reparto:</span> ${reparto}</p>
+                <div class='abajo'>
+                <p class="texto-parrafo fondo"><span class="texto-span">Director:</span> ${director}</p>
+                <p class="texto-parrafo fondo"><span class="texto-span">Calificacion IMDB:</span> ${calificacion}</p>
+                <p class="texto-parrafo fondo"><span class="texto-span">Genero:</span> ${genero}</p></div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+            <p></p>
+          </div>
+            `
+          }}
+           
 
 miListaHTML()
 crearPelis()
+marcarBotones()
+
+

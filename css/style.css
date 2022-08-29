@@ -19,6 +19,21 @@ p{
 }
 
 
+.section::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+.section::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+ 
+.section::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #216a8b 0%, #14aab4 99%);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+}
+
+
+
 .pelis {
     display: flex;
     flex-wrap: wrap;
@@ -62,3 +77,36 @@ label{
     font-size: 1rem;
     margin: 10px
 }
+
+.texto-titulo{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.texto-span{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3rem;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.texto-parrafo{
+    margin: 15px;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: initial;
+}
+
+.abajo{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
