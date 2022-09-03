@@ -23,7 +23,7 @@ buscador.addEventListener('change', e=> {
 
 
 const cargarContenido = async () => {
-   fetch('js/peliculas.json')
+   await fetch('js/peliculas.json')
         .then ((response) => response.json())
         .then ((pelis) => {
           peliculas = pelis
