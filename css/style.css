@@ -110,3 +110,44 @@ label{
     justify-content: space-between;
 }
 
+.hide {
+    display: none;
+}
+
+.texto-carga {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    margin: 100px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.error{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    margin: auto;
+    font-weight: bold;
+    color: white;
+   
+}
+
+.emoji{
+    text-align: center;
+    font-size: 5em;
+}
+
+.spinner {
+    margin-top: 20px;
+    font-size: 3rem;
+    animation: spinner 1.2s linear infinite;
+}
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

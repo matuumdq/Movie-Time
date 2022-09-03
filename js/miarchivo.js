@@ -1,3 +1,4 @@
+let peliculas = []
 let pelisLista = JSON.parse(localStorage.getItem("PelisenLista")) || []
 
 const btnAgregarLista = document.querySelector('#listaPeli')
@@ -7,16 +8,10 @@ const buscador = document.querySelector('#genero')
 const resultado = document.querySelector("#resultado")
 
 const datosBusqueda = {
-    nombre:'',
-    genero: '',
-    trailer: '',
-    reparto: '',
-    director: '',
-    id: ''
+    genero: ''
 }
 
 const containerDiv = document.querySelector(".container");
-
 
 btnAgregarLista.addEventListener('click', agregarPeli);
 
@@ -27,6 +22,28 @@ buscador.addEventListener('change', e=> {
 })
 
 
+const cargarContenido = async () => {
+   fetch('js/peliculas.json')
+        .then ((response) => response.json())
+        .then ((pelis) => {
+          peliculas = pelis
+          crearPelis()
+        })
+        .catch((error) => {
+          containerDiv.innerHTML = retornoError()
+        })
+  }
+
+  const retornoError = () => {
+    containerDiv.classList.remove('container')
+    return `<div class="error">
+              <div class="emoji"><i class="fa-solid fa-video-slash"></i></div>
+              <p>Se ha producido un error al cargar las peliculas</p>
+              <p>Intenta nuevamente en unos instantes...</p>
+            </div>`
+  }
+  
+
 function crearPelis(){
     peliculas.forEach((pelis) => {
         const {imagen, nombre, id, trailer, reparto, director} = pelis
@@ -35,16 +52,19 @@ function crearPelis(){
           class="card-img-top"
           src="${imagen}"
           alt="${nombre}"
+          title="${nombre}"
         />
         <div class="card-body">
           <p class="card-title">${nombre}</p>
           <a type="button" class="btn btn-primary agregar-lista" id="${id}">Agregar a la Lista</a>
         
         </div>
-        <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal">+Info</button>
+        <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>`
  
     })
+marcarBotones()
+
 }
 
 function miListaHTML(){
@@ -55,12 +75,12 @@ function miListaHTML(){
         const row = document.createElement('div')
         row.classList.add('card')
         row.innerHTML += `
-                <img class="card-img-top" src="${imagen}" alt=""/>
+                <img class="card-img-top" src="${imagen}" alt="${nombre}" title="${nombre}"/>
             <div class="card-body">
             <p class="card-title">${nombre}</p>
             <a type="button" class="btn btn-primary quitar-lista" id="${id}">Quitar de la Lista</a>
             </div>
-            <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal">+Info</button>
+            <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-magnifying-glass"></i></button>
             `;
             //Agregar Pelicula a la lista
             contenedorLista.appendChild(row);
@@ -124,7 +144,6 @@ function borrarPeli(peli){
 function filtrarPeli(){
     const resultado = peliculas.filter(filtrarGenero)
     if (resultado.length){
-        console.log(resultado)
         peliFiltrada(resultado)
     } else {
         return
@@ -152,12 +171,12 @@ function peliFiltrada(pelis){
         row.classList.add('card')
         row.innerHTML += 
         `
-                <img class="card-img-top" src="${imagen}" alt=""/>
+                <img class="card-img-top" src="${imagen}" alt="${nombre}" title="${nombre}"/>
             <div class="card-body">
             <p class="card-title">${nombre}</p>
             <a type="button" class="btn btn-primary agregar-lista" id="${id}">Agregar a la Lista</a>
             </div>
-            <button type="button" class="btn btn-primary modals" data-bs-toggle="modal" data-bs-target="#exampleModal">+info</button>
+            <button type="button" class="btn btn-primary modals tamano" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-magnifying-glass"></i></button>
             `;
             
             //Agregar Pelicula filtrada
@@ -204,6 +223,7 @@ function aLista() {
           })
 }
 
+
 function quitarLista() {
     const Toast = Swal.mixin({
         toast: true,
@@ -224,6 +244,8 @@ function quitarLista() {
         title: 'Pelicula quitada de la lista'
       })
 }
+
+
 function marcarBotones(){
     const btnModal= document.querySelectorAll('.modals')
         for (const button of btnModal) {
@@ -236,7 +258,6 @@ function marcarBotones(){
           }
     
           function crearModal(datosPeli){
-            console.log(datosPeli)
             const {nombre, genero, calificacion, trailer, reparto, director, id} = datosPeli
             const row = document.querySelector('#exampleModal')
             row.innerHTML = `
@@ -275,8 +296,17 @@ function marcarBotones(){
           }}
            
 
+
+function iniciar(){
+    setTimeout(() => {
+        cargarContenido() 
+        document.querySelector('#carga').classList.add('hide')  
+    }, 3000);
+}
+
+
+iniciar()
 miListaHTML()
-crearPelis()
 marcarBotones()
 
 

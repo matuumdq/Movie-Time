@@ -5,14 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <!-- <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    /> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/style.css" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script defer src="js/bdd.js"></script>
+    <script src="https://kit.fontawesome.com/9d0271933d.js" crossorigin="anonymous"></script>
     <script defer src="js/miarchivo.js"></script>
     <title>Preentrega 2 Salinas</title>
   </head>
@@ -30,11 +26,11 @@
         <label for="genero">Buscar por Genero</label>
         <select class="" id="genero">
           <option value="">Seleccione</option>
-                        <option value="drama">drama</option>
-                        <option value="crimen">crimen</option>
-                        <option value="accion">accion</option>
-                        <option value="comedia">comedia</option>
-                        <option value="infantiles">infantiles</option>
+                        <option value="drama">Drama</option>
+                        <option value="crimen">Crimen</option>
+                        <option value="accion">Accion</option>
+                        <option value="comedia">Comedia</option>
+                        <option value="infantiles">Infantiles</option>
         </select>
 
       </form>
@@ -42,6 +38,12 @@
         <div id="resultado" class="pelis"></div>
 
       <h3>Todas las mejores Peliculas</h3>
+     <div id="carga" class="texto-carga">Estamos cargando todas las peliculas
+      <div><i class="fa-solid fa-circle-notch spinner"></i></div>
+     </div>
+
+     
+    
       <div class="container"></div>
 
 
