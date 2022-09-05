@@ -20,20 +20,17 @@ buscador.addEventListener('change', e=> {
 
     filtrarPeli()
 })
-
-
-const cargarContenido = async () => {
-  try {
-    const response = await fetch('js/peliculas.json')
-        .then ((response) => response.json())
-        .then ((pelis) => {
-          peliculas = pelis
-          crearPelis()
-        })}
-  catch (error) {
+const cargarContenido = () => {
+  fetch('js/peliculas.json')
+    .then((response) => response.json())
+    .then((pelis) => {
+      peliculas = pelis
+      crearPelis()
+    })
+    .catch((error) => {
       containerDiv.innerHTML = retornoError()
-    }
-  }
+    })
+}
 
   const retornoError = () => {
     containerDiv.classList.remove('container')
