@@ -6,12 +6,12 @@ const contenedorLista = document.querySelector('#listado')
 const contenedorListado = document.querySelector('#listado .pelis')
 const buscador = document.querySelector('#genero')
 const resultado = document.querySelector("#resultado")
+const containerDiv = document.querySelector(".container");
+const resultadoTexto = document.querySelector('#resultado-texto')
 
 const datosBusqueda = {
     genero: ''
 }
-
-const containerDiv = document.querySelector(".container");
 
 btnAgregarLista.addEventListener('click', agregarPeli);
 
@@ -20,6 +20,7 @@ buscador.addEventListener('change', e=> {
 
     filtrarPeli()
 })
+
 const cargarContenido = () => {
   fetch('js/peliculas.json')
     .then((response) => response.json())
@@ -30,6 +31,7 @@ const cargarContenido = () => {
     .catch((error) => {
       containerDiv.innerHTML = retornoError()
     })
+    .finally(() => { document.querySelector('#carga').classList.add('hide') })
 }
 
   const retornoError = () => {
@@ -42,6 +44,7 @@ const cargarContenido = () => {
   }
   
 
+// Recorrer array y generar cards de cada pelicula 
 function crearPelis(){
     peliculas.forEach((pelis) => {
         const {imagen, nombre, id, trailer, reparto, director} = pelis
@@ -67,7 +70,7 @@ marcarBotones()
 
 function miListaHTML(){
     limpiarHTML();
-    //recorre pelis y genera HTML
+    //recorre pelis y genera HTML en Lista
     pelisLista.forEach( peli => {
         const { imagen, nombre, id, } = peli;
         const row = document.createElement('div')
@@ -90,9 +93,7 @@ function miListaHTML(){
 
 function agregarPeli(e){
     e.preventDefault();
-
     if (e.target.classList.contains('agregar-lista')){
-        
         e.target.classList.add('disabled')
         e.target.textContent = 'Ya esta en la lista'
         aLista()
@@ -105,59 +106,50 @@ function agregarPeli(e){
     }
 }
 
-
+// Comprueba si no esta en la Lista, si no esta, es agregada
 function leerDatosPeli(peli){
-
     const infoPeli = {
         imagen: peli.querySelector('img').src, 
         nombre: peli.querySelector('p').textContent,
         id: peli.querySelector('a').getAttribute('id'),
     }
     const existe = pelisLista.some(peli => peli.id === infoPeli.id);
-    if (existe){
-        return
-    } else {
+    if (existe===false){
         pelisLista = [...pelisLista, infoPeli]
-        miListaHTML();
-        
-}
+        miListaHTML();      
+      }
 }
 
 function borrarPeli(peli){
     const infoPeli = {
-        id: peli.querySelector('a').getAttribute('id'),
+        id: peli.querySelector('a').getAttribute('id')
     }
-
     const existe = pelisLista.some(peli => peli.id === infoPeli.id);
     if (existe){
         pelisLista = pelisLista.filter((pelisFilter) => pelisFilter.id !== infoPeli.id)
    miListaHTML()
    localStorage.setItem("PelisenLista", JSON.stringify(pelisLista))
    quitarLista()
-   
     }}
-
 
 
 function filtrarPeli(){
     const resultado = peliculas.filter(filtrarGenero)
     if (resultado.length){
         peliFiltrada(resultado)
-    } else {
-        return
-    }
-}
+    } }
 
 function filtrarGenero(peli){
     if (datosBusqueda.genero){
         return peli.genero === datosBusqueda.genero
-    } 
-    return peli
+    }
+    
 }
 
 
 function peliFiltrada(pelis){
     limpiandoGenero()
+    document.querySelector('#texto').classList.remove('hide')
     if (pelis.length==peliculas.length){
         const row = document.createElement('h4')
         row.innerHTML = `Seleccione un Genero para filtrar`
@@ -179,27 +171,13 @@ function peliFiltrada(pelis){
             
             //Agregar Pelicula filtrada
             resultado.appendChild(row);
-            
     })
     marcarBotones()
 }
 }
 
-function limpiarHTML() {
-    while(contenedorLista.firstChild){
-        contenedorLista.removeChild(contenedorLista.firstChild)
-    }
-    
-}
 
-
-function limpiandoGenero() {
-    while(resultado.firstChild){
-        resultado.removeChild(resultado.firstChild)
-    }
-    
-}
-
+// Uso de Libreria de Alertas
 function aLista() {
         const Toast = Swal.mixin({
             toast: true,
@@ -220,7 +198,6 @@ function aLista() {
             title: 'Pelicula agregada a la lista'
           })
 }
-
 
 function quitarLista() {
     const Toast = Swal.mixin({
@@ -244,21 +221,23 @@ function quitarLista() {
 }
 
 
+// Asignar ID a cada boton y el modal
 function marcarBotones(){
     const btnModal= document.querySelectorAll('.modals')
         for (const button of btnModal) {
             button.addEventListener('click', function(peli) {
                 const peliSeleccionada = peli.target.parentElement;
-                const asd = {id : peliSeleccionada.querySelector('a').getAttribute('id')}
-                const existe = peliculas.find(pelis => pelis.id === parseInt(asd.id));
+                const idBoton = {id : peliSeleccionada.querySelector('a').getAttribute('id')}
+                const existe = peliculas.find(pelis => pelis.id === parseInt(idBoton.id));
                 crearModal(existe)
             })
           }
+        }
     
-          function crearModal(datosPeli){
-            const {nombre, genero, calificacion, trailer, reparto, director, id} = datosPeli
-            const row = document.querySelector('#exampleModal')
-            row.innerHTML = `
+function crearModal(datosPeli){
+    const {nombre, genero, calificacion, trailer, reparto, director, id} = datosPeli
+    const row = document.querySelector('#exampleModal')
+      row.innerHTML = `
             <div class="modal-dialog modal-xl">
             <div class="modal-content">
               <div class="modal-header">
@@ -288,17 +267,24 @@ function marcarBotones(){
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
               </div>
             </div>
-            <p></p>
           </div>
             `
-          }}
+ }
            
-
+ function limpiarHTML() {
+      while(contenedorLista.firstChild){
+      contenedorLista.removeChild(contenedorLista.firstChild)
+  }}
+        
+        
+function limpiandoGenero() {
+      while(resultado.firstChild){
+      resultado.removeChild(resultado.firstChild)
+}}
 
 function iniciar(){
     setTimeout(() => {
-        cargarContenido() 
-        document.querySelector('#carga').classList.add('hide')  
+        cargarContenido()  
     }, 3000);
 }
 

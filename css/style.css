@@ -32,7 +32,19 @@ p{
     box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
 }
 
+.seleccionar {
+    margin: 100px 50px;
+}
 
+.navbar {
+    height: 80px;
+}
+
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
 
 .pelis {
     display: flex;
